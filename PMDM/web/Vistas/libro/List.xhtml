@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form>
+                <p:dataTable value="#{libroController.items}" var="libro" style="border:solid 1px"
+                         paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20" >
+                    <p:column headerText="Cód." sortBy="#{libro.codLibro}" width="50" style="text-align: center">
+                        <h:outputText value="#{libro.codLibro}"/>
+                    </p:column>
+                    <p:column headerText="Título" sortBy="#{libro.nomLibro}">
+                        <h:outputText value="#{libro.nomLibro}"/>
+                    </p:column>
+                    <p:column headerText="Año" sortBy="#{libro.ano}" width="50" style="text-align: center" >
+                        <h:outputText value="#{libro.ano}"/>
+                    </p:column>
+                    <p:column headerText="Foto" style="text-align: center" ><!-- aquí añado la foto desde la carpeta resources,
+                                                                            para ello library que manda a resources y el nombre que 
+                                                                            está en la base de datos.-->
+                        <p:lightBox styleClass="imagebox"><!--esto lo que hace es adornar-->
+                            <h:outputLink value="/Biblioteca/faces/javax.faces.resources/#{libro.portada}?ln=portadas" 
+                                          title="#{libro.nomLibro} #{libro.ano}">
+                                <h:graphicImage library="portadas" name="#{libro.portada}" height="100px"/>
+                            </h:outputLink>
+                        </p:lightBox>    
+                    </p:column>
+                    <p:column headerText="Autores" width="20%" >
+                        <h:selectManyListbox disabled="true" style="background-color: transparent; border: none; font-size: small; overflow-y: scroll" size="3">
+                            <f:selectItems value="#{libro.autorList}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}"/><!--aquí meto un objeto en cada fila, 
+                            un libro, pero se mostrará el título con el itemLabel-->
+                        </h:selectManyListbox>
+                    </p:column>
+                    <p:column headerText="Premios" width="20%" >
+                        <h:selectManyListbox disabled="true" style="background-color: transparent; border: none; font-size: small; overflow-y: scroll" size="3">
+                            <f:selectItems value="#{libro.premioList}" var="premio" itemValue="#{premio}" itemLabel="#{premio.nomPremio}"/>
+                        </h:selectManyListbox>
+                    </p:column>
+                    <p:column headerText="Pelicula">
+                        <h:graphicImage rendered="#{libroController.tienePelicula(libro)}" library="iconos" name="trailer.png" height="45px"/>
+                    </p:column>
+                    
+                    <p:column width="150">
+                        <h:commandLink action="#{libroController.prepareView}" value="#{bundle.ListLibroViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{libroController.prepareEdit}" value="#{bundle.ListLibroEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{libroController.destroy}" value="#{bundle.ListLibroDestroyLink}"/>
+                    </p:column>
+                </p:dataTable>
+                <br />
+                <h:commandLink action="#{libroController.prepareCreate}" value="#{bundle.ListLibroCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListLibroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

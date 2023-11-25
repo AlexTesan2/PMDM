@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            
+            <h:form>
+                
+                <h:selectOneMenu id="nacionalidad" value="#{autorController.selected.nacionalidad}" >
+                        <f:selectItems value="#{paisController.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                
+                
+                
+                <h:selectManyListbox value="#{libroController.selected.premioList}" id ="losPremios" style="width: 240px" size="5">
+                    <f:selectItems value="#{premioController.itemsPorLibro}" var="premio" itemValue="premio"/>
+                    <f:converter converterId="premiosConverter"/>
+                </h:selectManyListbox>
+                
+                
+                
+                <p:dataTable value="#{autorController.items}" var="autor">
+                    <h:selectManyListbox disabled="true">
+                            <f:selectItems value="#{autor.libroList}" var="libro" itemValue="#{libro}" itemLabel="#{libro.nomLibro}"/>
+                    </h:selectManyListbox>
+                </p:dataTable>
+                <!--Por cada autor, se mostrarán los titulos de sus libros-->
+                
+                
+                
+                <p:dataTable value="#{autorController.selected.libroList}" var="l">
+                        <p:column headerText="Titulo">
+                            <h:outputText value="#{l.nomLibro}"/>
+                        </p:column>
+                </p:dataTable>
+                <!--Por cada libro del autor seleccionado, se mostraran sus titulos-->
+                
+                
+                
+                <form>                                      <!--todo es el mismo ejercicio-->
+                    <p:toolbar>                             <!--Desplegable de elección-->
+                        <f:facet name="left">
+                            
+                            <p:selectOneMenu id="unAutor" value="#{libroController.autor}" onchange="#{libroController.cargarLista()} submit()">
+                                <f:selectItems value="#{autorController.itemsAvailableSelectMany}" />
+                                <f:converter converterId="autoresConverter"/>
+                            </p:selectOneMenu>
+                            
+                        </f:facet>
+                        <!--Lo q elijas, se cargará en el objeto autor del libro (value)-->
+                        <!--Se mostrarán todos items de autores-->
+                        <!--Al elegir, s ellamara ala funcion cargarLista del controlador de libro, que cargara la lista de autores de la clase libro-->
+                    </p:toolbar>
+                    
+                    <p:dataTable value="#{libroController.listaAutor}" var="libro">
+                        <p:column headerText="Título" sortBy="#{libro.nomLibro}">
+                            <h:outputText value="#{libro.nomLibro}"/>
+                        </p:column>
+                    </p:dataTable>
+                    
+                    <!--EN LIBRO_CONTOLLER  se llama a cargarLista-->
+                    
+                    public void cargarLista(){
+                        listaAutor = ejbFacade.LibrosPorAutor(autor); 
+                    }
+                    
+                    <!--EN LIBRO_FACADE  se llama a LibrosPorAutor,     los facades llaman a consultas-->
+                    
+                    public List<Libro> LibrosPorAutor(Autor autor){
+                        em = getEntityManager();
+                        Query q;
+                        q = em.createNamedQuery("Libro.findByAutor").setParameter("elAutor", autor);
+                        return q.getResultList();
+                    }
+                    
+                    <!--EN LIBRO.java se llama a esta consulta-->
+                    
+                    @NamedQuery(name = "Libro.findByAutor", query = "SELECT l FROM Libro l WHERE l.autorList = :elAutor")
+                    
+                    <!--finalmente mostramos en la tabla solo los libro del autor seleccionado-->
+                    
+                </form>     <!--fin ejerciciocompleto-->
+                
+                
+                
+                
+                
+                
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

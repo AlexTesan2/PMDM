@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                
+                <h:panelGrid style="width: 50%">
+                    <div>
+                        <h2>
+                            Nombre:
+                                #{autorController.selected.nomAutor}
+                                #{autorController.selected.apellido1}
+                                #{autorController.selected.apellido2}
+                        </h2>
+
+                        <h:outputText value="#{autorController.selected.FNac}" title="#{bundle.ViewAutorTitle_FNac}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{autorController.selected.FDef}" title="#{bundle.ViewAutorTitle_FDef}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{autorController.selected.localidad}" title="#{bundle.ViewAutorTitle_localidad}"/>
+                        <h:graphicImage library="banderas" name="#{autorController.selected.nacionalidad.bandera}" height="50px" width="50px"/>
+                        <h:graphicImage library="Autores" name="#{autorController.selected.foto}" height="200px" width="200px"/>
+                        <h3>Biografía:</h3>
+                        <p style="max-width: 400px; text-align: justify">#{autorController.selected.biografia}" title="#{bundle.ViewAutorTitle_biografia}"</p>
+                    </div>
+                </h:panelGrid >
+                <h:panelGrid>
+                    <h2>Libros:</h2>
+                    <p:dataTable value="#{autorController.selected.libroList}" var="l" style="width: 70%;float: left">
+                        <p:column headerText="Titulo" width="50" style="text-align: center">
+                            <h:outputText value="#{l.nomLibro}"/>
+                        </p:column>
+                        <p:column headerText="año" width="50" style="text-align: center">
+                            <h:outputText value="#{l.ano}"/>
+                        </p:column>
+                        <p:column headerText="portada" width="50" style="text-align: center">
+                            <h:graphicImage library="portadas" name="#{l.portada}" height="60px"/>
+                        </p:column>
+                        <p:column headerText="sinopsis" style="text-align: center ; width: 250px;height: 100px;background-color: transparent; border: none; font-size: small; overflow-y: scroll">
+                            <h:outputText value="#{l.comentario}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGrid>
+                
+                
+                <br />
+                <h:commandLink action="#{autorController.destroyAndView}" value="#{bundle.ViewAutorDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewAutorEditLink}"/>
+                <br />
+                <h:commandLink action="#{autorController.prepareCreate}" value="#{bundle.ViewAutorCreateLink}" />
+                <br />
+                <h:commandLink action="#{autorController.prepareList}" value="#{bundle.ViewAutorShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewAutorIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

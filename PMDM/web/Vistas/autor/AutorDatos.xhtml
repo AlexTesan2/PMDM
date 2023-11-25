@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            
+            
+            <h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 80%; float:left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="unAutor" value="#{libroController.autor}" onchange="#{autorController.cargar_datos()} submit()">
+                            <f:selectItems value="#{autorController.itemsAvailableSelectMany}" />
+                            <f:converter converterId="autoresConverter"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <f:facet name="right">
+                        <h:graphicImage library="Autores" name="#{libroController.autor.foto}" height="60px"/> 
+                        <h:graphicImage library="banderas" name="#{libroController.autor.nacionalidad.bandera}" height="60px"/> 
+                    </f:facet>
+                </p:toolbar>
+                
+                
+            </h:form>
+            
+            <h:panelGrid style="width: 50%">
+                    <div>
+                        <h2>
+                            Nombre:
+                                #{libroController.autor.nomAutor}
+                                #{libroController.autor.apellido1}
+                                #{libroController.autor.apellido2}
+                                (#{libroController.autor.nacionalidad.nomPais})
+                        </h2>
+                   </div>
+            </h:panelGrid >
+            
+            <h:form>
+                <p:dataTable value="#{libroController.autor.libroList}" var="libro" style="width: 40%;float: left">
+                    <p:column headerText="Cód." width="50" style="text-align: center">
+                        <h:outputText value="#{libro.codLibro}"/>
+                    </p:column>
+                    <p:column headerText="Título" sortBy="#{libro.nomLibro}">
+                        <h:outputText value="#{libro.nomLibro}"/>
+                    </p:column>
+                    <p:column headerText="Año" sortBy="#{libro.ano}" width="50" style="text-align: center" >
+                        <h:outputText value="#{libro.ano}"/>
+                    </p:column>
+                </p:dataTable>
+                
+                
+                <p:dataTable value="#{libroController.autor.autorPremioList}" var="premio" style="width: 40%;float: left">
+                    <p:column headerText="cod" width="50" style="text-align: center" >
+                        <h:outputText value="#{premio.autorPremioPK.codPremio}"/>
+                    </p:column>
+                    <p:column headerText="Premios" width="50" style="text-align: center">
+                        <h:outputText value="#{premio.premio.nomPremio}"/>
+                        <h:outputText value="#{premio.autorPremioPK.anio}"/>
+                    </p:column>
+                </p:dataTable>
+                
+                <p:dock position="bottom">
+                    <p:menuitem value="Listado" icon="/resources/iconos/listado.png" url="List.xhtml"/>
+                    <p:menuitem value="Inicio" icon="/resources/iconos/home.ico" outcome="/index" url="../../index.xhtml"/>
+                </p:dock>
+                <br />
+                
+            </h:form>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!--<h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="unAutor" value="# {autorController.autor}" onchange="# {autorController.cargar_libros()} submit()">
+                            <f:selectItems value="# {autorController.itemsAvailableSelectOne}"/>
+                            <f:converter converterId="autoresConverter"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:toolbar> 
+                
+            </h:form>
+            
+            <h:form>
+                <p:dataTable var="libro" value="# {autorController.listalibros}" style="width: 40%;float: left">
+                    <p:column headerText="Cód." sortBy="# {libro.codLibro}" width="50" style="text-align: center">
+                        <h:outputText value="# {libro.codLibro}"/>
+                    </p:column>
+                    <p:column headerText="Titulo" sortBy="# {libro.nomLibro}">
+                        <h:outputText value="# {libro.nomLibro}"/>
+                    </p:column>
+                    <p:column headerText="Portada" style="text-align: center">
+                        <h:graphicImage library="portadas" name="# {libro}" height="60px"/>    
+                    </p:column>
+                </p:dataTable>
+                
+                
+                <p:dataTable var="autorPremio" value="# {autorController.listaPremios}" style="width: 40%;float: left">
+                    <p:column headerText="Premio">
+                        <h:outputText value="# {autorPremio.premio.nomPremio}"/>
+                    </p:column>
+                    <p:column headerText="País">
+                        <h:graphicImage library="banderas" name="# {autorPremio.premio.codPais.bandera}" height="45px"/>
+                    </p:column>
+                </p:dataTable>
+                
+                <p:dock position="bottom">
+                    <p:menuitem value="Listado" icon="/resources/iconos/listado.png" url="List.xhtml"/>
+                    <p:menuitem value="Inicio" icon="/resources/iconos/home.ico" outcome="/index" url="../../index.xhtml"/>
+                </p:dock>                
+            </h:form>-->
+        </ui:define>
+    </ui:composition>
+
+</html>

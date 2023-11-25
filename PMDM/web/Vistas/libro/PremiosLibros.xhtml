@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 69%; float:left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="unPremio" value="#{libroController.premio}" onchange="#{libroController.cargarListaPremio()} submit()">
+                            <f:selectItems value="#{premioController.itemsAvailableSelectOne}" /> <!--acabado en s, porque sera algo para una lista-->
+                            <f:converter converterId="premiosConverter"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:toolbar>
+                
+                
+            </h:form>
+            
+            
+            <h:form>
+                <p:dataTable value="#{libroController.listaPremio}" var="libro" style="width: 70%;float: left"><!--en la vista los valores que tengan serán 
+                                                                                      los mismos que los del controlador-->
+                     <p:column headerText="Cód." sortBy="#{libro.codLibro}" width="50" style="text-align: center">
+                        <h:outputText value="#{libro.codLibro}"/>
+                    </p:column>
+                    <p:column headerText="Título" sortBy="#{libro.nomLibro}">
+                        <h:outputText value="#{libro.nomLibro}"/>
+                    </p:column>
+                    <p:column headerText="Año" sortBy="#{libro.ano}" width="50" style="text-align: center" >
+                        <h:outputText value="#{libro.ano}"/>
+                    </p:column>
+                    <p:column headerText="Foto" style="text-align: center" >
+                        <p:lightBox styleClass="imagebox"><!--esto lo que hace es adornar-->
+                            <h:outputLink value="/Biblioteca/faces/javax.faces.resources/#{libro.portada}?ln=portadas" 
+                                          title="#{libro.nomLibro} #{libro.ano}"><!--Agustín no sabe porqué esto pero se hace así
+                                para el nombre debajo de la ventana del lightBox ponemos el title-->
+                                <h:graphicImage library="portadas" name="#{libro.portada}" height="60px"/>
+                            </h:outputLink>
+                        </p:lightBox>    
+                    </p:column>
+                    <p:column headerText="Autores" width="20%" >
+                        <h:selectManyListbox disabled="true" style="background-color: transparent; border: none; font-size: small; overflow-y: scroll" size="3">
+                            <f:selectItems value="#{libro.autorList}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}"/><!--aquí meto un objeto en cada fila, 
+                            un libro, pero se mostrará el título con el itemLabel-->
+                        </h:selectManyListbox>
+                    </p:column>
+                    <p:column headerText="Premios" width="20%" >
+                        <h:selectManyListbox disabled="true" style="background-color: transparent; border: none; font-size: small; overflow-y: scroll" size="3">
+                            <f:selectItems value="#{libro.premioList}" var="premio" itemValue="#{premio}" itemLabel="#{premio.nomPremio}"/>
+                        </h:selectManyListbox>
+                    </p:column>
+                </p:dataTable>
+                <p:galleria value="#{libroController.listaPremio}" var="libro" panelWidth="250" panelHeight="400"
+                            style="float: right; margin-right: 70px" showCaption="true" ><!--el showCaption es para que muestre el title-->
+                    <p:graphicImage library="portadas" name="#{libro.portada}" title="#{libro.ano}"></p:graphicImage>
+                </p:galleria>
+                <p:dock position="bottom">
+                    <p:menuitem value="Listado" icon="/resources/iconos/listado.png" url="List.xhtml"/>
+                    <p:menuitem value="Inicio" icon="/resources/iconos/home.ico" outcome="/index" url="../../index.xhtml"/>
+                </p:dock>
+                <br />
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
