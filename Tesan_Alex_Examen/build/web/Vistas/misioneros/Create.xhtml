@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMisionerosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_codMisionero}" for="codMisionero" />
+                    <h:inputText id="codMisionero" value="#{misionerosController.selected.codMisionero}" title="#{bundle.CreateMisionerosTitle_codMisionero}" required="true" requiredMessage="#{bundle.CreateMisionerosRequiredMessage_codMisionero}"/>
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_nomMisionero}" for="nomMisionero" />
+                    <h:inputText id="nomMisionero" value="#{misionerosController.selected.nomMisionero}" title="#{bundle.CreateMisionerosTitle_nomMisionero}" />
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_tipoMisionero}" for="tipoMisionero" />
+                    <h:inputText id="tipoMisionero" value="#{misionerosController.selected.tipoMisionero}" title="#{bundle.CreateMisionerosTitle_tipoMisionero}" />
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_mail1}" for="mail1" />
+                    <h:inputText id="mail1" value="#{misionerosController.selected.mail1}" title="#{bundle.CreateMisionerosTitle_mail1}" />
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_mail2}" for="mail2" />
+                    <h:inputText id="mail2" value="#{misionerosController.selected.mail2}" title="#{bundle.CreateMisionerosTitle_mail2}" />
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{misionerosController.selected.telefono}" title="#{bundle.CreateMisionerosTitle_telefono}" />
+                    <h:outputLabel value="#{bundle.CreateMisionerosLabel_codMision}" for="codMision" />
+                    <h:inputText id="codMision" value="#{misionerosController.selected.codMision}" title="#{bundle.CreateMisionerosTitle_codMision}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{misionerosController.create}" value="#{bundle.CreateMisionerosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{misionerosController.prepareList}" value="#{bundle.CreateMisionerosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateMisionerosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

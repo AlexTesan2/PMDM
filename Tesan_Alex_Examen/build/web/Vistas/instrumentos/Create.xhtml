@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateInstrumentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateInstrumentosLabel_lt}" for="lt" />
+                    <h:inputText id="lt" value="#{instrumentosController.selected.lt}" title="#{bundle.CreateInstrumentosTitle_lt}" required="true" requiredMessage="#{bundle.CreateInstrumentosRequiredMessage_lt}"/>
+                    <h:outputLabel value="#{bundle.CreateInstrumentosLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{instrumentosController.selected.codigo}" title="#{bundle.CreateInstrumentosTitle_codigo}" />
+                    <h:outputLabel value="#{bundle.CreateInstrumentosLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{instrumentosController.selected.descripcion}" title="#{bundle.CreateInstrumentosTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateInstrumentosLabel_numero}" for="numero" />
+                    <h:inputText id="numero" value="#{instrumentosController.selected.numero}" title="#{bundle.CreateInstrumentosTitle_numero}" />
+                    <h:outputLabel value="#{bundle.CreateInstrumentosLabel_bloque}" for="bloque" />
+                    <h:inputText id="bloque" value="#{instrumentosController.selected.bloque}" title="#{bundle.CreateInstrumentosTitle_bloque}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{instrumentosController.create}" value="#{bundle.CreateInstrumentosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{instrumentosController.prepareList}" value="#{bundle.CreateInstrumentosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateInstrumentosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

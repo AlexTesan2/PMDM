@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            CAD
+        </ui:define>
+        <h2>CAD</h2>
+        <ui:define name="body">
+            
+            <h:form>
+                <p:toolbar style="margin-bottom: 10px; width: 80%; float:left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="cad" value="#{cadsubController.miCad}" onchange="#{cadsubController.cargar_subCads()} submit()">
+                            <f:selectItems value="#{cadController.itemsAvailableSelectOne}" />
+                            <f:converter converterId="cadConverter"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                </p:toolbar>
+            </h:form> 
+            
+            <h:panelGrid style="width: 50%">
+                    <div>
+                        <h2>
+                            Nombre:
+                                #{cadsubController.miCad.codCad}
+                                #{cadsubController.miCad.nomCad}
+                        </h2>
+                   </div>
+            </h:panelGrid >
+        </ui:define>
+    </ui:composition>
+
+</html>

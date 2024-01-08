@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditInstrumentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditInstrumentosLabel_lt}" for="lt" />
+                    <h:inputText id="lt" value="#{instrumentosController.selected.lt}" title="#{bundle.EditInstrumentosTitle_lt}" required="true" requiredMessage="#{bundle.EditInstrumentosRequiredMessage_lt}"/>
+                    <h:outputLabel value="#{bundle.EditInstrumentosLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{instrumentosController.selected.codigo}" title="#{bundle.EditInstrumentosTitle_codigo}" />
+                    <h:outputLabel value="#{bundle.EditInstrumentosLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{instrumentosController.selected.descripcion}" title="#{bundle.EditInstrumentosTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditInstrumentosLabel_numero}" for="numero" />
+                    <h:inputText id="numero" value="#{instrumentosController.selected.numero}" title="#{bundle.EditInstrumentosTitle_numero}" />
+                    <h:outputLabel value="#{bundle.EditInstrumentosLabel_bloque}" for="bloque" />
+                    <h:inputText id="bloque" value="#{instrumentosController.selected.bloque}" title="#{bundle.EditInstrumentosTitle_bloque}" />
+                </h:panelGrid>
+                <h:commandLink action="#{instrumentosController.update}" value="#{bundle.EditInstrumentosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditInstrumentosViewLink}"/>
+                <br />
+                <h:commandLink action="#{instrumentosController.prepareList}" value="#{bundle.EditInstrumentosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditInstrumentosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

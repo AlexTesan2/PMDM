@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMisionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMisionesLabel_codMision}"/>
+                    <h:outputText value="#{misionesController.selected.codMision}" title="#{bundle.ViewMisionesTitle_codMision}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_nomMision}"/>
+                    <h:outputText value="#{misionesController.selected.nomMision}" title="#{bundle.ViewMisionesTitle_nomMision}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_codInspectoria}"/>
+                    <h:outputText value="#{misionesController.selected.codInspectoria}" title="#{bundle.ViewMisionesTitle_codInspectoria}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_direccion1}"/>
+                    <h:outputText value="#{misionesController.selected.direccion1}" title="#{bundle.ViewMisionesTitle_direccion1}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_direccion2}"/>
+                    <h:outputText value="#{misionesController.selected.direccion2}" title="#{bundle.ViewMisionesTitle_direccion2}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_provincia}"/>
+                    <h:outputText value="#{misionesController.selected.provincia}" title="#{bundle.ViewMisionesTitle_provincia}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_ciudad}"/>
+                    <h:outputText value="#{misionesController.selected.ciudad}" title="#{bundle.ViewMisionesTitle_ciudad}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_pais}"/>
+                    <h:outputText value="#{misionesController.selected.pais}" title="#{bundle.ViewMisionesTitle_pais}"/>
+                    <h:outputText value="#{bundle.ViewMisionesLabel_telefono}"/>
+                    <h:outputText value="#{misionesController.selected.telefono}" title="#{bundle.ViewMisionesTitle_telefono}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{misionesController.destroyAndView}" value="#{bundle.ViewMisionesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMisionesEditLink}"/>
+                <br />
+                <h:commandLink action="#{misionesController.prepareCreate}" value="#{bundle.ViewMisionesCreateLink}" />
+                <br />
+                <h:commandLink action="#{misionesController.prepareList}" value="#{bundle.ViewMisionesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMisionesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

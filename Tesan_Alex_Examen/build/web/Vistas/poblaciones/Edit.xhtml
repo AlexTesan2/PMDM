@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPoblacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPoblacionesLabel_codPoblacion}" for="codPoblacion" />
+                    <h:inputText id="codPoblacion" value="#{poblacionesController.selected.codPoblacion}" title="#{bundle.EditPoblacionesTitle_codPoblacion}" required="true" requiredMessage="#{bundle.EditPoblacionesRequiredMessage_codPoblacion}"/>
+                    <h:outputLabel value="#{bundle.EditPoblacionesLabel_nomPoblacion}" for="nomPoblacion" />
+                    <h:inputText id="nomPoblacion" value="#{poblacionesController.selected.nomPoblacion}" title="#{bundle.EditPoblacionesTitle_nomPoblacion}" />
+                    <h:outputLabel value="#{bundle.EditPoblacionesLabel_target}" for="target" />
+                    <h:inputText id="target" value="#{poblacionesController.selected.target}" title="#{bundle.EditPoblacionesTitle_target}" />
+                </h:panelGrid>
+                <h:commandLink action="#{poblacionesController.update}" value="#{bundle.EditPoblacionesSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPoblacionesViewLink}"/>
+                <br />
+                <h:commandLink action="#{poblacionesController.prepareList}" value="#{bundle.EditPoblacionesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPoblacionesIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

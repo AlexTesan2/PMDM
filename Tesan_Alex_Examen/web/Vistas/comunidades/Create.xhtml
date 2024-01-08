@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateComunidadesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateComunidadesLabel_codComunidad}" for="codComunidad" />
+                    <h:inputText id="codComunidad" value="#{comunidadesController.selected.codComunidad}" title="#{bundle.CreateComunidadesTitle_codComunidad}" required="true" requiredMessage="#{bundle.CreateComunidadesRequiredMessage_codComunidad}"/>
+                    <h:outputLabel value="#{bundle.CreateComunidadesLabel_nomComunidad}" for="nomComunidad" />
+                    <h:inputText id="nomComunidad" value="#{comunidadesController.selected.nomComunidad}" title="#{bundle.CreateComunidadesTitle_nomComunidad}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comunidadesController.create}" value="#{bundle.CreateComunidadesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{comunidadesController.prepareList}" value="#{bundle.CreateComunidadesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateComunidadesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

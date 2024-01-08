@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePaisesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{paisesController.selected.codigo}" title="#{bundle.CreatePaisesTitle_codigo}" required="true" requiredMessage="#{bundle.CreatePaisesRequiredMessage_codigo}"/>
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_codPais}" for="codPais" />
+                    <h:inputText id="codPais" value="#{paisesController.selected.codPais}" title="#{bundle.CreatePaisesTitle_codPais}" />
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_codPaisTelefono}" for="codPaisTelefono" />
+                    <h:inputText id="codPaisTelefono" value="#{paisesController.selected.codPaisTelefono}" title="#{bundle.CreatePaisesTitle_codPaisTelefono}" />
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_nomPais}" for="nomPais" />
+                    <h:inputText id="nomPais" value="#{paisesController.selected.nomPais}" title="#{bundle.CreatePaisesTitle_nomPais}" />
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_nomPaisIngles}" for="nomPaisIngles" />
+                    <h:inputText id="nomPaisIngles" value="#{paisesController.selected.nomPaisIngles}" title="#{bundle.CreatePaisesTitle_nomPaisIngles}" />
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_subContinente}" for="subContinente" />
+                    <h:inputText id="subContinente" value="#{paisesController.selected.subContinente}" title="#{bundle.CreatePaisesTitle_subContinente}" />
+                    <h:outputLabel value="#{bundle.CreatePaisesLabel_codRegion}" for="codRegion" />
+                    <h:inputText id="codRegion" value="#{paisesController.selected.codRegion}" title="#{bundle.CreatePaisesTitle_codRegion}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{paisesController.create}" value="#{bundle.CreatePaisesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{paisesController.prepareList}" value="#{bundle.CreatePaisesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePaisesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

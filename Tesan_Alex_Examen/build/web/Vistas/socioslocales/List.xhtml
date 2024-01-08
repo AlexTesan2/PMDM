@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSocioslocalesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSocioslocalesEmpty}" rendered="#{socioslocalesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{socioslocalesController.items.rowCount > 0}">
+                    <h:outputText value="#{socioslocalesController.pagination.pageFirstItem + 1}..#{socioslocalesController.pagination.pageLastItem + 1}/#{socioslocalesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{socioslocalesController.previous}" value="#{bundle.Previous} #{socioslocalesController.pagination.pageSize}" rendered="#{socioslocalesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{socioslocalesController.next}" value="#{bundle.Next} #{socioslocalesController.pagination.pageSize}" rendered="#{socioslocalesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{socioslocalesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSocioslocalesTitle_codSocio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codSocio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSocioslocalesTitle_nomSocio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomSocio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSocioslocalesTitle_orden}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orden}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{socioslocalesController.prepareView}" value="#{bundle.ListSocioslocalesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{socioslocalesController.prepareEdit}" value="#{bundle.ListSocioslocalesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{socioslocalesController.destroy}" value="#{bundle.ListSocioslocalesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{socioslocalesController.prepareCreate}" value="#{bundle.ListSocioslocalesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSocioslocalesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

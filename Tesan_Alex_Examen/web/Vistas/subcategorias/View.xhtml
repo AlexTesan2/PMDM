@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSubcategoriasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSubcategoriasLabel_codSubcategoria}"/>
+                    <h:outputText value="#{subcategoriasController.selected.codSubcategoria}" title="#{bundle.ViewSubcategoriasTitle_codSubcategoria}"/>
+                    <h:outputText value="#{bundle.ViewSubcategoriasLabel_nomSubcategoria}"/>
+                    <h:outputText value="#{subcategoriasController.selected.nomSubcategoria}" title="#{bundle.ViewSubcategoriasTitle_nomSubcategoria}"/>
+                    <h:outputText value="#{bundle.ViewSubcategoriasLabel_descripcion}"/>
+                    <h:outputText value="#{subcategoriasController.selected.descripcion}" title="#{bundle.ViewSubcategoriasTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewSubcategoriasLabel_codCategoria}"/>
+                    <h:outputText value="#{subcategoriasController.selected.codCategoria}" title="#{bundle.ViewSubcategoriasTitle_codCategoria}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{subcategoriasController.destroyAndView}" value="#{bundle.ViewSubcategoriasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSubcategoriasEditLink}"/>
+                <br />
+                <h:commandLink action="#{subcategoriasController.prepareCreate}" value="#{bundle.ViewSubcategoriasCreateLink}" />
+                <br />
+                <h:commandLink action="#{subcategoriasController.prepareList}" value="#{bundle.ViewSubcategoriasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSubcategoriasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
